@@ -1,7 +1,11 @@
 import React, { useEffect } from "react"
 import { useLocation } from "react-router-dom"
+import { connect } from "react-redux"
+import { setIsRoomHost } from "../../store/action"
 
 const JoinRoom = (props) => {
+  const { setIsRoomHostAction } = props
+
   const search = useLocation().search
 
   useEffect(() => {
@@ -9,6 +13,7 @@ const JoinRoom = (props) => {
 
     if (isRoomHost) {
       // 将主持人的状态保存到 redux 的 store 里
+      setIsRoomHostAction(isRoomHost)
     }
   })
 
@@ -19,4 +24,12 @@ const JoinRoom = (props) => {
   )
 }
 
-export default JoinRoom
+const mapStateToProps = (state) => ({
+  ...state,
+})
+
+const mapActionsToProps = (dispatch) => ({
+  setIsRoomHostAction: (isRoomHost) => dispatch(setIsRoomHost(isRoomHost)),
+})
+
+export default connect(mapStateToProps, mapActionsToProps)(JoinRoom)
