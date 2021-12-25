@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import JoinRoomInputs from "./JoinRoomInputs"
 import OnlyWithAudioCheckbox from "./OnlyWithAudioCheckbox"
 import { setConnectOnlyWithAudio } from "../../../store/action"
+import ErrorMessage from "./ErrorMessage"
 
 const JoinRoomContent = (props) => {
   const { isRoomHost, setConnectOnlyWithAudio, connectOnlyWithAudio } = props
@@ -24,6 +25,7 @@ const JoinRoomContent = (props) => {
         connectOnlyWithAudio={connectOnlyWithAudio}
         setConnectOnlyWithAudio={setConnectOnlyWithAudio}
       />
+      <ErrorMessage errorMessage={"会议 ID 不存在！"} />
     </>
   )
 }
