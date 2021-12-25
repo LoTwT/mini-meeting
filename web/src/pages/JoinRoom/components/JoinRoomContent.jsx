@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom"
 
 import JoinRoomInputs from "./JoinRoomInputs"
 import OnlyWithAudioCheckbox from "./OnlyWithAudioCheckbox"
-import { setConnectOnlyWithAudio } from "../../../store/action"
+import {
+  setConnectOnlyWithAudio,
+  setIdentity,
+  setRoomId,
+} from "../../../store/action"
 import ErrorMessage from "./ErrorMessage"
 import JoinRoomButtons from "./JoinRoomButtons"
 import { getRoomExists } from "../../../utils/api"
@@ -12,7 +16,13 @@ import { getRoomExists } from "../../../utils/api"
 const JoinRoomContent = (props) => {
   const navigate = useNavigate()
 
-  const { isRoomHost, setConnectOnlyWithAudio, connectOnlyWithAudio } = props
+  const {
+    isRoomHost,
+    setConnectOnlyWithAudio,
+    connectOnlyWithAudio,
+    setIdentityAction,
+    setRoomIdAction,
+  } = props
 
   const [roomIdValue, setRoomIdValue] = useState("")
   const [nameValue, setNameValue] = useState("")
@@ -20,6 +30,7 @@ const JoinRoomContent = (props) => {
 
   // 创建 / 加入房间
   const handleJoinRoom = async () => {
+    setIdentityAction(nameValue)
     if (isRoomHost) {
       createRoom()
     } else {
@@ -39,6 +50,7 @@ const JoinRoomContent = (props) => {
         setErrorMessage("会议房间人数已满，请稍后再试！")
       } else {
         // 进入房间
+        setRoomIdAction(roomIdValue)
         navigate("/room")
       }
     } else {
@@ -79,6 +91,10 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = (dispatch) => ({
   setConnectOnlyWithAudio: (onlyWithAudio) =>
     dispatch(setConnectOnlyWithAudio(onlyWithAudio)),
+
+  setIdentityAction: (identity) => dispatch(setIdentity(identity)),
+
+  setRoomIdAction: (roomId) => dispatch(setRoomId(roomId)),
 })
 
 export default connect(mapStateToProps, mapActionToProps)(JoinRoomContent)
