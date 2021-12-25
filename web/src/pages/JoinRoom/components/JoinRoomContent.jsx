@@ -2,9 +2,11 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 
 import JoinRoomInputs from "./JoinRoomInputs"
+import OnlyWithAudioCheckbox from "./OnlyWithAudioCheckbox"
+import { setConnectOnlyWithAudio } from "../../../store/action"
 
 const JoinRoomContent = (props) => {
-  const { isRoomHost } = props
+  const { isRoomHost, setConnectOnlyWithAudio, connectOnlyWithAudio } = props
 
   const [roomIdValue, setRoomIdValue] = useState("")
   const [nameValue, setNameValue] = useState("")
@@ -18,6 +20,10 @@ const JoinRoomContent = (props) => {
         setNameValue={setNameValue}
         isRoomHost={isRoomHost}
       />
+      <OnlyWithAudioCheckbox
+        connectOnlyWithAudio={connectOnlyWithAudio}
+        setConnectOnlyWithAudio={setConnectOnlyWithAudio}
+      />
     </>
   )
 }
@@ -26,4 +32,9 @@ const mapStateToProps = (state) => ({
   ...state,
 })
 
-export default connect(mapStateToProps, null)(JoinRoomContent)
+const mapActionToProps = (dispatch) => ({
+  setConnectOnlyWithAudio: (onlyWithAudio) =>
+    dispatch(setConnectOnlyWithAudio(onlyWithAudio)),
+})
+
+export default connect(mapStateToProps, mapActionToProps)(JoinRoomContent)
