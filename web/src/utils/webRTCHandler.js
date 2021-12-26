@@ -115,7 +115,7 @@ export const removePeerConnection = (data) => {
 // 显示本地视频
 const showLocalVideoPreview = (stream) => {
   const videosContainer = document.getElementById("videos-portal")
-  videosContainer.classList.add("videos_protal_styles")
+  videosContainer.classList.add("videos_portal_styles")
 
   const videoContainer = document.createElement("div")
   videoContainer.classList.add("video_track_container")
