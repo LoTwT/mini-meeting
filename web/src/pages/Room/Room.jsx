@@ -7,8 +7,9 @@ import VideoSection from "./components/VideoSection/VideoSection"
 import ChatSection from "./components/ChatSection/ChatSection"
 import RoomLabel from "./components/RoomLabel"
 import * as webRTCHandler from "../../utils/webRTCHandler"
+import Overlay from "./components/Overlay"
 
-const Room = ({ isRoomHost, identity, roomId }) => {
+const Room = ({ isRoomHost, identity, roomId, showOverlay }) => {
   useEffect(() => {
     webRTCHandler.getLocalPreviewAndInitRoomConnection(
       isRoomHost,
@@ -23,6 +24,7 @@ const Room = ({ isRoomHost, identity, roomId }) => {
       <VideoSection />
       <ChatSection />
       <RoomLabel roomId={roomId} />
+      {showOverlay && <Overlay />}
     </div>
   )
 }

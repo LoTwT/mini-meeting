@@ -5,6 +5,9 @@ const initState = {
   isRoomHost: false,
   connectOnlyWithAudio: false,
   roomId: null,
+
+  // 显示覆盖层 (loading...)
+  showOverlay: true,
 }
 
 const reducer = (state = initState, action) => {
@@ -31,6 +34,12 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         identity: action.identity,
+      }
+
+    case Actions.SET_SHOW_OVERLAY:
+      return {
+        ...state,
+        showOverlay: action.showOverlay,
       }
 
     default:
