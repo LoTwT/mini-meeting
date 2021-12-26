@@ -1,5 +1,6 @@
 import { store } from "../store/store"
 import { setShowOverlay } from "../store/action"
+import * as wss from "./wss"
 
 // 设置默认的采集音视频流的配置
 const defaultConstraints = {
@@ -27,10 +28,11 @@ export const getLocalPreviewAndInitRoomConnection = (
       // 预览本地视频
       showLocalVideoPreview(localStream)
 
-      // 初始化房间连接
-
       // 派发 action, 隐藏加载动画
       store.dispatch(setShowOverlay(false))
+
+      // 初始化房间连接
+      isRoomHost ? wss.createNewRoom(identity) : wss.joinRoom(roomId, identity)
     })
     .catch((error) => console.log("获取本地媒体流失败: ", error))
 }

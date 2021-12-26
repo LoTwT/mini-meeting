@@ -16,7 +16,7 @@ const Room = ({ isRoomHost, identity, roomId, showOverlay }) => {
       identity,
       roomId,
     )
-  })
+  }, [])
 
   return (
     <div className="room_container">
