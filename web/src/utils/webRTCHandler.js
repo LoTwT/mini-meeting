@@ -88,6 +88,28 @@ export const handleSignalingData = (data) => {
   peers[data.connUserSocketId].signal(data.signal)
 }
 
+export const removePeerConnection = (data) => {
+  const { socketId } = data
+
+  const videoContainer = document.getElementById(socketId)
+  const videoElement = `${socketId}-video`
+
+  if (videoContainer && videoElement) {
+    const tracks = videoElement.srcObject.getTracks()
+    tracks.forEach((track) => track.stop())
+    videoElement.srcObject = null
+
+    videoContainer.removeChild(videoElement)
+    videoContainer.parentNode.removeChild(videoContainer)
+
+    if (peers[socketId]) {
+      peers[socketId].destroy()
+    }
+
+    delete peers[socketId]
+  }
+}
+
 // ===========================================================================
 // Video UI
 // 显示本地视频
@@ -125,6 +147,7 @@ const addStream = (stream, connUserSocketId) => {
   videoContainer.id = connUserSocketId
 
   const videoElement = document.createElement("video")
+  videoElement.id = `${connUserSocketId}-video`
   // 自动播放
   videoElement.autoplay = true
   // 静音

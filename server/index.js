@@ -156,6 +156,9 @@ const disconnectHandler = (socket) => {
     socket.leave(user.roomId)
 
     if (room.connectedUsers.length > 0) {
+      // 用户断开 webRTC 连接
+      io.to(room.id).emit("user-disconnected", { socketId: socket.id })
+
       // 发送通知告知有用户离开并更新房间
       io.to(room.id).emit("room-update", {
         connectedUsers: room.connectedUsers,
