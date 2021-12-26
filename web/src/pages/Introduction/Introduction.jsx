@@ -9,7 +9,7 @@ import { setIsRoomHost } from "../../store/action"
 const Introduction = ({ setIsRoomHostAction }) => {
   useEffect(() => {
     setIsRoomHostAction(false)
-  })
+  }, [])
 
   return (
     <div className="introduction_page_container">

@@ -19,7 +19,7 @@ const JoinRoom = (props) => {
       // 将主持人的状态保存到 redux 的 store 里
       setIsRoomHostAction(isRoomHost)
     }
-  })
+  }, [])
 
   return (
     <div className="join_room_page_container">
