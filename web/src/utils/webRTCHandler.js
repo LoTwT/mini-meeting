@@ -44,6 +44,7 @@ const showLocalVideoPreview = (stream) => {}
 // ===========================================================================
 
 let peers = {}
+let streams = []
 
 // 配置 STUN 服务器
 const getConfiguration = () => ({
@@ -75,11 +76,23 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
 
     wss.signalPeerData(signalData)
   })
+
+  // 获取媒体流 stream
+  peers[connUserSocketId].on("stream", (stream) => {
+    // 显示接收的 stream 流
+    addStream(stream, connUserSocketId)
+    streams = [...streams, stream]
+  })
 }
 
 // 将信令数据添加到接收 webRTC 对等连接准备的一方的对等对象中
 export const handleSignalingData = (data) => {
   peers[data.connUserSocketId].signal(data.signal)
+}
+
+// 添加接收的 stream 媒体流并进行显示
+const addStream = (stream, connUserSocketId) => {
+  // 使用 js 创建容器展示视频
 }
 
 // ===========================================================================

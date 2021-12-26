@@ -28,9 +28,19 @@ export const connectWithSocketIOServer = () => {
 
     // 已经存在于房间的用户准备 webRTC 对等连接, false 表明发起方在等待接收方准备 webRTC
     webRTCHandler.prepareNewPeerConnection(connUserSocketId, false)
+
+    // 通知对方 (发起方), 已经准备完毕, 可以进行 webRTC 连接
+    socket.emit("conn-init", { connUserSocketId: connUserSocketId })
   })
 
   socket.on("conn-signal", (data) => webRTCHandler.handleSignalingData(data))
+
+  socket.on("conn-init", (data) => {
+    // 接收方的 socketId
+    const { connUserSocketId } = data
+
+    webRTCHandler.prepareNewPeerConnection(connUserSocketId, true)
+  })
 }
 
 // 主持人创建会议房间

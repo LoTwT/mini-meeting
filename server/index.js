@@ -61,6 +61,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => disconnectHandler(socket))
 
   socket.on("conn-signal", (data) => signalingHandler(socket, data))
+
+  socket.on("conn-init", (data) => initializeConnectionHandler(socket, data))
 })
 
 // socket.io handler
@@ -175,6 +177,15 @@ const signalingHandler = (socket, data) => {
   }
 
   io.to(connUserSocketId).emit("conn-signal", signalingData)
+}
+
+// 初始化对等连接
+const initializeConnectionHandler = (socket, data) => {
+  const { connUserSocketId } = data
+
+  const initData = { connUserSocketId: socket.id }
+
+  io.to(connUserSocketId).emit("conn-init", initData)
 }
 
 // ===========================================================================
