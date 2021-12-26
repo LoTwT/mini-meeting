@@ -20,10 +20,10 @@ let rooms = []
 // 创建路由验证房间是否存在
 app.get("/api/room-exists/:roomId", (req, res) => {
   const { roomId } = req.params
-  const isRoomExist = rooms.find((room) => room.id === roomId)
+  const room = rooms.find((room) => room.id === roomId)
 
   // 房间存在
-  if (isRoomExist) {
+  if (room) {
     // 房间是否满员
     if (room.connectedUsers.length > 3) {
       // 房间人数已满
@@ -51,7 +51,11 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log(`用户已成功连接 socket.io 服务器: ${socket.id}`)
 
+  // 创建新会议房间
   socket.on("create-new-room", (data) => createNewRoomHandler(socket, data))
+
+  // 加入会议房间
+  socket.on("join-room", (data) => joinRoomHandler(socket, data))
 })
 
 // socket.io handler
@@ -91,6 +95,30 @@ const createNewRoomHandler = (socket, data) => {
 
   // 发送通知告知有新用户加入并更新房间
   socket.emit("room-update", { connectedUsers: newRoom.connectedUsers })
+}
+
+const joinRoomHandler = (socket, data) => {
+  const { roomId, identity } = data
+
+  const newUser = {
+    identity,
+    id: uuidv4(),
+    roomId,
+    socketId: socket.id,
+  }
+
+  // 判断传递过来的 roomId 是否匹配对应会议房间
+  const room = rooms.find((room) => room.id === roomId)
+  room.connectedUsers = [...room.connectedUsers, newUser]
+
+  // 加入房间
+  socket.join(roomId)
+
+  // 将新用户添加到已连接的用户数组里
+  connectedUsers = [...connectedUsers, newUser]
+
+  // 发送通知告知有新用户加入并更新房间
+  io.to(roomId).emit("room-update", { connectedUsers: room.connectedUsers })
 }
 
 // ===========================================================================
