@@ -1,19 +1,5 @@
 import React from "react"
-
-const dummyParticipants = [
-  {
-    identity: "User1",
-  },
-  {
-    identity: "User2",
-  },
-  {
-    identity: "User3",
-  },
-  {
-    identity: "User4",
-  },
-]
+import { connect } from "react-redux"
 
 const Participant = (props) => {
   const { identity, lastItem } = props
@@ -25,14 +11,14 @@ const Participant = (props) => {
   )
 }
 
-const Participants = () => {
+const Participants = ({ participants }) => {
   return (
     <div className="participants_container">
-      {dummyParticipants.map((participant, index) => (
+      {participants.map((participant, index) => (
         <Participant
           key={participant.identity}
           identity={participant.identity}
-          lastItem={dummyParticipants.length === index + 1}
+          lastItem={participants.length === index + 1}
           participant={participant}
         />
       ))}
@@ -40,4 +26,8 @@ const Participants = () => {
   )
 }
 
-export default Participants
+const mapStateToProps = (state) => ({
+  ...state,
+})
+
+export default connect(mapStateToProps)(Participants)

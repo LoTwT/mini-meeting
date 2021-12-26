@@ -4,6 +4,7 @@ const Actions = {
   SET_ROOM_ID: "SET_ROOM_ID",
   SET_IDENTITY: "SET_IDENTITY",
   SET_SHOW_OVERLAY: "SET_SHOW_OVERLAY",
+  SET_PARTICIPANTS: "SET_PARTICIPANTS",
 }
 
 export default Actions
@@ -31,4 +32,9 @@ export const setRoomId = (roomId) => ({
 export const setShowOverlay = (showOverlay) => ({
   type: Actions.SET_SHOW_OVERLAY,
   showOverlay,
+})
+
+export const setParticipants = (participants) => ({
+  type: Actions.SET_PARTICIPANTS,
+  participants,
 })

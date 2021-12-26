@@ -5,6 +5,7 @@ const initState = {
   isRoomHost: false,
   connectOnlyWithAudio: false,
   roomId: null,
+  participants: [],
 
   // 显示覆盖层 (loading...)
   showOverlay: true,
@@ -40,6 +41,12 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         showOverlay: action.showOverlay,
+      }
+
+    case Actions.SET_PARTICIPANTS:
+      return {
+        ...state,
+        participants: action.participants,
       }
 
     default:
