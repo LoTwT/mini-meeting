@@ -124,7 +124,7 @@ const showLocalVideoPreview = (stream) => {
   // 自动播放
   videoElement.autoplay = true
   // 静音
-  videoElement.muted = true
+  videoElement.muted = false
   // 媒体流
   videoElement.srcObject = stream
 
@@ -151,7 +151,7 @@ const addStream = (stream, connUserSocketId) => {
   // 自动播放
   videoElement.autoplay = true
   // 静音
-  videoElement.muted = true
+  videoElement.muted = false
   // 媒体流
   videoElement.srcObject = stream
 
@@ -174,3 +174,13 @@ const addStream = (stream, connUserSocketId) => {
 }
 
 // ===========================================================================
+// room button logic
+export const toggleMic = (isMuted) => {
+  // getAudioTracks 返回可用的音频轨道
+  // enabled 获取或设置轨道是否激活
+  localStream.getAudioTracks()[0].enabled = isMuted ? true : false
+}
+
+export const toggleCamera = (isDisabled) => {
+  localStream.getVideoTracks()[0].enabled = isDisabled ? true : false
+}
