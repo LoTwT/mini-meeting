@@ -64,6 +64,22 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
     config: configuration,
     stream: localStream,
   })
+
+  // 信令数据交换
+  peers[connUserSocketId].on("signal", (data) => {
+    // data: a webrtc offer, answer, or ice candidate
+    const signalData = {
+      signal: data,
+      connUserSocketId,
+    }
+
+    wss.signalPeerData(signalData)
+  })
+}
+
+// 将信令数据添加到接收 webRTC 对等连接准备的一方的对等对象中
+export const handleSignalingData = (data) => {
+  peers[data.connUserSocketId].signal(data.signal)
 }
 
 // ===========================================================================

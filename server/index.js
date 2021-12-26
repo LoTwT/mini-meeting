@@ -59,6 +59,8 @@ io.on("connection", (socket) => {
 
   // 用户断开连接
   socket.on("disconnect", () => disconnectHandler(socket))
+
+  socket.on("conn-signal", (data) => signalingHandler(socket, data))
 })
 
 // socket.io handler
@@ -161,6 +163,18 @@ const disconnectHandler = (socket) => {
       rooms = rooms.filter((r) => r.id !== room.id)
     }
   }
+}
+
+// 交换信令
+const signalingHandler = (socket, data) => {
+  const { signal, connUserSocketId } = data
+
+  const signalingData = {
+    signal,
+    connUserSocketId: socket.id,
+  }
+
+  io.to(connUserSocketId).emit("conn-signal", signalingData)
 }
 
 // ===========================================================================
