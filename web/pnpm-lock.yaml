@@ -12,6 +12,7 @@ specifiers:
   react-redux: ^7.2.6
   react-router-dom: ^6.2.1
   react-scripts: 5.0.0
+  socket.io-client: ^4.4.0
 
 dependencies:
   '@reduxjs/toolkit': 1.7.1_react-redux@7.2.6+react@17.0.2
@@ -24,6 +25,7 @@ dependencies:
   react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
   react-router-dom: 6.2.1_react-dom@17.0.2+react@17.0.2
   react-scripts: 5.0.0_react@17.0.2
+  socket.io-client: 4.4.0
 
 devDependencies:
   prettier: 2.5.1
@@ -1806,6 +1808,10 @@ packages:
       '@sinonjs/commons': 1.8.3
     dev: false
 
+  /@socket.io/component-emitter/3.0.0:
+    resolution: {integrity: sha1-iGORVnb4N9na17dvUMtQDB6UIuk=, tarball: '@socket.io/component-emitter/download/@socket.io/component-emitter-3.0.0.tgz'}
+    dev: false
+
   /@surma/rollup-plugin-off-main-thread/2.2.3:
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==, tarball: '@surma/rollup-plugin-off-main-thread/download/@surma/rollup-plugin-off-main-thread-2.2.3.tgz'}
     dependencies:
@@ -3001,8 +3007,17 @@ packages:
       - supports-color
     dev: false
 
+  /backo2/1.0.2:
+    resolution: {integrity: sha1-MasayLEpNjRj41s+u2n038+6eUc=, tarball: backo2/download/backo2-1.0.2.tgz}
+    dev: false
+
   /balanced-match/1.0.2:
     resolution: {integrity: sha1-6D46fj8wCzTLnYf2FfoMvzV2kO4=, tarball: balanced-match/download/balanced-match-1.0.2.tgz}
+    dev: false
+
+  /base64-arraybuffer/1.0.1:
+    resolution: {integrity: sha1-h70TUlYm20qYOOAKUIwrc+/PNIw=, tarball: base64-arraybuffer/download/base64-arraybuffer-1.0.1.tgz}
+    engines: {node: '>= 0.6.0'}
     dev: false
 
   /batch/0.6.1:
@@ -4026,6 +4041,31 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
+  /engine.io-client/6.1.1:
+    resolution: {integrity: sha512-V05mmDo4gjimYW+FGujoGmmmxRaDsrVr7AXA3ZIfa04MWM1jOfZfUwou0oNqhNwy/votUDvGDt4JA4QF4e0b4g==, tarball: engine.io-client/download/engine.io-client-6.1.1.tgz}
+    dependencies:
+      '@socket.io/component-emitter': 3.0.0
+      debug: 4.3.3
+      engine.io-parser: 5.0.2
+      has-cors: 1.1.0
+      parseqs: 0.0.6
+      parseuri: 0.0.6
+      ws: 8.2.3
+      xmlhttprequest-ssl: 2.0.0
+      yeast: 0.1.2
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /engine.io-parser/5.0.2:
+    resolution: {integrity: sha512-wuiO7qO/OEkPJSFueuATIXtrxF7/6GTbAO9QLv7nnbjwZ5tYhLm9zxvLwxstRs0dcT0KUlWTjtIOs1T86jt12g==, tarball: engine.io-parser/download/engine.io-parser-5.0.2.tgz}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      base64-arraybuffer: 1.0.1
+    dev: false
+
   /enhanced-resolve/5.8.3:
     resolution: {integrity: sha1-bVUtRlzOBCP1s9cYUR6lOCansvA=, tarball: enhanced-resolve/download/enhanced-resolve-5.8.3.tgz}
     engines: {node: '>=10.13.0'}
@@ -4909,6 +4949,10 @@ packages:
 
   /has-bigints/1.0.1:
     resolution: {integrity: sha1-ZP5qywIGc+O3jbA1pa9pqp0HsRM=, tarball: has-bigints/download/has-bigints-1.0.1.tgz}
+    dev: false
+
+  /has-cors/1.1.0:
+    resolution: {integrity: sha1-XkdHk/fqmEPRu5nCPu9J/xJv/zk=, tarball: has-cors/download/has-cors-1.1.0.tgz}
     dev: false
 
   /has-flag/3.0.0:
@@ -6775,6 +6819,14 @@ packages:
     resolution: {integrity: sha1-4aHAhcVps9wIMhGE8Zo5zCf3wws=, tarball: parse5/download/parse5-6.0.1.tgz}
     dev: false
 
+  /parseqs/0.0.6:
+    resolution: {integrity: sha1-jku1oZ0c3IRKCKyXTTTic6+mcNU=, tarball: parseqs/download/parseqs-0.0.6.tgz}
+    dev: false
+
+  /parseuri/0.0.6:
+    resolution: {integrity: sha1-4Ulugp46wv9H85pN0ESzKCPEolo=, tarball: parseuri/download/parseuri-0.0.6.tgz}
+    dev: false
+
   /parseurl/1.3.3:
     resolution: {integrity: sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=, tarball: parseurl/download/parseurl-1.3.3.tgz}
     engines: {node: '>= 0.8'}
@@ -8465,6 +8517,32 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
+  /socket.io-client/4.4.0:
+    resolution: {integrity: sha512-g7riSEJXi7qCFImPow98oT8X++MSsHz6MMFRXkWNJ6uEROSHOa3kxdrsYWMq85dO+09CFMkcqlpjvbVXQl4z6g==, tarball: socket.io-client/download/socket.io-client-4.4.0.tgz}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@socket.io/component-emitter': 3.0.0
+      backo2: 1.0.2
+      debug: 4.3.3
+      engine.io-client: 6.1.1
+      parseuri: 0.0.6
+      socket.io-parser: 4.1.1
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /socket.io-parser/4.1.1:
+    resolution: {integrity: sha1-CtU9mAeByrHqvjIEF9hIDAEz5i0=, tarball: socket.io-parser/download/socket.io-parser-4.1.1.tgz}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      '@socket.io/component-emitter': 3.0.0
+      debug: 4.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /sockjs/0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==, tarball: sockjs/download/sockjs-0.3.24.tgz}
     dependencies:
@@ -9694,6 +9772,19 @@ packages:
         optional: true
     dev: false
 
+  /ws/8.2.3:
+    resolution: {integrity: sha1-Y6VkVtsbBDZ9C3IaC4DK5ti+y7o=, tarball: ws/download/ws-8.2.3.tgz}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
   /ws/8.4.0:
     resolution: {integrity: sha512-IHVsKe2pjajSUIl4KYMQOdlyliovpEPquKkqbwswulszzI7r0SfQrxnXdWAEqOlDCLrVSJzo+O1hAwdog2sKSQ==, tarball: ws/download/ws-8.4.0.tgz}
     engines: {node: '>=10.0.0'}
@@ -9713,6 +9804,11 @@ packages:
 
   /xmlchars/2.2.0:
     resolution: {integrity: sha1-Bg/hvLf5x2/ioX24apvDq4lCEMs=, tarball: xmlchars/download/xmlchars-2.2.0.tgz}
+    dev: false
+
+  /xmlhttprequest-ssl/2.0.0:
+    resolution: {integrity: sha1-kTYMhrkU5n9E3OdpGAAnwNphjGc=, tarball: xmlhttprequest-ssl/download/xmlhttprequest-ssl-2.0.0.tgz}
+    engines: {node: '>=0.4.0'}
     dev: false
 
   /xtend/4.0.2:
@@ -9750,6 +9846,10 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 20.2.9
+    dev: false
+
+  /yeast/0.1.2:
+    resolution: {integrity: sha1-AI4G2AlDIMNy28L47XagymyKxBk=, tarball: yeast/download/yeast-0.1.2.tgz}
     dev: false
 
   /yocto-queue/0.1.0:

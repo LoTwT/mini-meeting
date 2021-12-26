@@ -40,13 +40,19 @@ app.get("/api/room-exists/:roomId", (req, res) => {
 
 // ===========================================================================
 
-// socker.io
+// socket.io
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
   },
 })
+
+io.on("connection", (socket) => {
+  console.log(`用户已成功连接 socket.io 服务器: ${socket.id}`)
+})
+
+// ===========================================================================
 
 app.get("/", (req, res) => {
   res.end("mini-meeting")
