@@ -6,7 +6,7 @@ import Peer from "simple-peer"
 // 设置默认的采集音视频流的配置
 const defaultConstraints = {
   audio: true,
-  video: true,
+  video: { width: "480", height: "360" },
 }
 
 let localStream = null
@@ -136,6 +136,15 @@ const addStream = (stream, connUserSocketId) => {
   videoElement.onloadedmetadata = () => {
     videoElement.play()
   }
+
+  // 放大/缩小视频信息
+  videoElement.addEventListener("click", () => {
+    if (videoElement.classList.contains("full_screen")) {
+      videoElement.classList.remove("full_screen")
+    } else {
+      videoElement.classList.add("full_screen")
+    }
+  })
 
   videoContainer.appendChild(videoElement)
   videosContainer.appendChild(videoContainer)
