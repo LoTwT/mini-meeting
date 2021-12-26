@@ -12,6 +12,7 @@ specifiers:
   react-redux: ^7.2.6
   react-router-dom: ^6.2.1
   react-scripts: 5.0.0
+  simple-peer: ^9.11.0
   socket.io-client: ^4.4.0
 
 dependencies:
@@ -25,6 +26,7 @@ dependencies:
   react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
   react-router-dom: 6.2.1_react-dom@17.0.2+react@17.0.2
   react-scripts: 5.0.0_react@17.0.2
+  simple-peer: 9.11.0
   socket.io-client: 4.4.0
 
 devDependencies:
@@ -3020,6 +3022,10 @@ packages:
     engines: {node: '>= 0.6.0'}
     dev: false
 
+  /base64-js/1.5.1:
+    resolution: {integrity: sha1-GxtEAWClv3rUC2UPCVljSBkDkwo=, tarball: base64-js/download/base64-js-1.5.1.tgz}
+    dev: false
+
   /batch/0.6.1:
     resolution: {integrity: sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=, tarball: batch/download/batch-0.6.1.tgz}
     dev: false
@@ -3120,6 +3126,13 @@ packages:
 
   /buffer-indexof/1.1.1:
     resolution: {integrity: sha1-Uvq8xqYG0aADAoAmSO9o9jnaJow=, tarball: buffer-indexof/download/buffer-indexof-1.1.1.tgz}
+    dev: false
+
+  /buffer/6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==, tarball: buffer/download/buffer-6.0.3.tgz}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
     dev: false
 
   /builtin-modules/3.2.0:
@@ -4085,6 +4098,10 @@ packages:
     resolution: {integrity: sha1-CY3JDruD2N/6CJ1VJWs1HTTE2lU=, tarball: entities/download/entities-2.2.0.tgz}
     dev: false
 
+  /err-code/3.0.1:
+    resolution: {integrity: sha1-pETHuZJwXysSDuMgsJly7vMxySA=, tarball: err-code/download/err-code-3.0.1.tgz}
+    dev: false
+
   /error-ex/1.3.2:
     resolution: {integrity: sha1-tKxAZIEH/c3PriQvQovqihTU8b8=, tarball: error-ex/download/error-ex-1.3.2.tgz}
     dependencies:
@@ -4824,6 +4841,10 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: false
 
+  /get-browser-rtc/1.1.0:
+    resolution: {integrity: sha1-0UlOKZsA8z/I6dbTNDukuplxGiw=, tarball: get-browser-rtc/download/get-browser-rtc-1.1.0.tgz}
+    dev: false
+
   /get-caller-file/2.0.5:
     resolution: {integrity: sha1-T5RBKoLbMvNuOwuXQfipf+sDH34=, tarball: get-caller-file/download/get-caller-file-2.0.5.tgz}
     engines: {node: 6.* || 8.* || >= 10.*}
@@ -5182,6 +5203,10 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       harmony-reflect: 1.6.2
+    dev: false
+
+  /ieee754/1.2.1:
+    resolution: {integrity: sha1-jrehCmP/8l0VpXsAFYbRd9Gw01I=, tarball: ieee754/download/ieee754-1.2.1.tgz}
     dev: false
 
   /ignore/4.0.6:
@@ -8501,6 +8526,20 @@ packages:
 
   /signal-exit/3.0.6:
     resolution: {integrity: sha512-sDl4qMFpijcGw22U5w63KmD3cZJfBuFlVNbVMKje2keoKML7X2UzWbc4XrmEbDwg0NXJc3yv4/ox7b+JWb57kQ==, tarball: signal-exit/download/signal-exit-3.0.6.tgz}
+    dev: false
+
+  /simple-peer/9.11.0:
+    resolution: {integrity: sha1-6NJ2CcemEMPd11dn2oaOjaq2dXE=, tarball: simple-peer/download/simple-peer-9.11.0.tgz}
+    dependencies:
+      buffer: 6.0.3
+      debug: 4.3.3
+      err-code: 3.0.1
+      get-browser-rtc: 1.1.0
+      queue-microtask: 1.2.3
+      randombytes: 2.1.0
+      readable-stream: 3.6.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /sisteransi/1.0.5:

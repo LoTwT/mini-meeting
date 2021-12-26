@@ -1,6 +1,7 @@
 import { store } from "../store/store"
 import { setShowOverlay } from "../store/action"
 import * as wss from "./wss"
+import Peer from "simple-peer"
 
 // 设置默认的采集音视频流的配置
 const defaultConstraints = {
@@ -37,6 +38,32 @@ export const getLocalPreviewAndInitRoomConnection = (
     .catch((error) => console.log("获取本地媒体流失败: ", error))
 }
 
-const showLocalVideoPreview = (stream) => {
-  // 显示本地视频
+// 显示本地视频
+const showLocalVideoPreview = (stream) => {}
+
+// ===========================================================================
+
+let peers = {}
+
+// 配置 STUN 服务器
+const getConfiguration = () => ({
+  iceServers: [
+    {
+      urls: "stun:stun1.l.google.com:19302",
+    },
+  ],
+})
+
+// 准备 webRTC 对等连接
+export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
+  const configuration = getConfiguration()
+
+  // 实例化对等对象
+  peers[connUserSocketId] = new Peer({
+    initiator: isInitiator,
+    config: configuration,
+    stream: localStream,
+  })
 }
+
+// ===========================================================================
