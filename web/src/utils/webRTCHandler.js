@@ -83,7 +83,7 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
     // data: a webrtc offer, answer, or ice candidate
     const signalData = {
       signal: data,
-      connUserSocketId,
+      connUserSocketId: connUserSocketId,
     }
 
     wss.signalPeerData(signalData)
@@ -98,11 +98,11 @@ export const prepareNewPeerConnection = (connUserSocketId, isInitiator) => {
   })
 
   // data 数据通道
-  peers[connUserSocketId].on("data", (data) => {
-    const messageData = JSON.parse(data)
+  // peers[connUserSocketId].on("data", (data) => {
+  //   const messageData = JSON.parse(data)
 
-    appendNewMessage(messageData)
-  })
+  //   appendNewMessage(messageData)
+  // })
 }
 
 // 将信令数据添加到接收 webRTC 对等连接准备的一方的对等对象中
@@ -114,10 +114,11 @@ export const removePeerConnection = (data) => {
   const { socketId } = data
 
   const videoContainer = document.getElementById(socketId)
-  const videoElement = `${socketId}-video`
+  const videoElement = document.getElementById(`${socketId}-video`)
 
   if (videoContainer && videoElement) {
     const tracks = videoElement.srcObject.getTracks()
+
     tracks.forEach((track) => track.stop())
     videoElement.srcObject = null
 
@@ -136,7 +137,7 @@ export const removePeerConnection = (data) => {
 // Video UI
 // 显示本地视频
 const showLocalVideoPreview = (stream) => {
-  const videosContainer = document.getElementById("videos-portal")
+  const videosContainer = document.getElementById("videos_portal")
   videosContainer.classList.add("videos_portal_styles")
 
   const videoContainer = document.createElement("div")
@@ -146,7 +147,7 @@ const showLocalVideoPreview = (stream) => {
   // 自动播放
   videoElement.autoplay = true
   // 静音
-  videoElement.muted = false
+  videoElement.muted = true
   // 媒体流
   videoElement.srcObject = stream
 
@@ -168,7 +169,7 @@ const showLocalVideoPreview = (stream) => {
 // 添加接收的 stream 媒体流并进行显示
 const addStream = (stream, connUserSocketId) => {
   // 使用 js 创建容器展示视频
-  const videosContainer = document.getElementById("videos-portal")
+  const videosContainer = document.getElementById("videos_portal")
 
   const videoContainer = document.createElement("div")
   videoContainer.classList.add("video_track_container")
@@ -179,7 +180,7 @@ const addStream = (stream, connUserSocketId) => {
   // 自动播放
   videoElement.autoplay = true
   // 静音
-  videoElement.muted = false
+  videoElement.muted = true
   // 媒体流
   videoElement.srcObject = stream
 

@@ -89,7 +89,7 @@ const createNewRoomHandler = (socket, data) => {
   // 创建新的会议房间
   const newRoom = {
     id: roomId,
-    connectedUsers,
+    connectedUsers: [newUser],
   }
 
   // 将信访件添加到已创建的会议房间数组里
@@ -128,13 +128,13 @@ const joinRoomHandler = (socket, data) => {
 
   // 告知除自己以外的其他已经连接的用户准备 webRTC 对等连接
   room.connectedUsers.forEach((user) => {
-    // 去除自己
+    // 存储发起对等连接方的 socketId 信息
     if (user.socketId !== socket.id) {
-      const connectData = {
+      const data = {
         connUserSocketId: socket.id,
       }
 
-      io.to(user.socketId).emit("conn-prepare", connectData)
+      io.to(user.socketId).emit("conn-prepare", data)
     }
   })
 
