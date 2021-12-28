@@ -9,18 +9,28 @@ const defaultConstraints = {
   video: { width: "480", height: "360" },
 }
 
+// 仅开启音频连接
+const onlyAudioConstraints = {
+  audio: true,
+  video: false,
+}
+
 let localStream = null
 
 // 采集本地音视频并初始化房间
-export const getLocalPreviewAndInitRoomConnection = (
+export const getLocalPreviewAndInitRoomConnection = async (
   isRoomHost,
   identity,
   roomId = null,
+  onlyAudio,
 ) => {
+  // 判断是开启音频还是音视频
+  const constraints = onlyAudio ? onlyAudioConstraints : defaultConstraints
+
   // 采集本地音视频流 (获取媒体输入的访问权限)
   // https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia
   navigator.mediaDevices
-    .getUserMedia(defaultConstraints)
+    .getUserMedia(constraints)
     .then((stream) => {
       console.log("成功获取本地媒体流")
 
@@ -33,7 +43,9 @@ export const getLocalPreviewAndInitRoomConnection = (
       store.dispatch(setShowOverlay(false))
 
       // 初始化房间连接
-      isRoomHost ? wss.createNewRoom(identity) : wss.joinRoom(roomId, identity)
+      isRoomHost
+        ? wss.createNewRoom(identity, onlyAudio)
+        : wss.joinRoom(roomId, identity, onlyAudio)
     })
     .catch((error) => console.log("获取本地媒体流失败: ", error))
 }
@@ -144,6 +156,12 @@ const showLocalVideoPreview = (stream) => {
   }
 
   videoContainer.appendChild(videoElement)
+
+  // 仅开启音频的样式
+  if (store.getState().connectOnlyWithAudio) {
+    videoContainer.appendChild(onlyAudioLabel())
+  }
+
   videosContainer.appendChild(videoContainer)
 }
 
@@ -180,7 +198,30 @@ const addStream = (stream, connUserSocketId) => {
   })
 
   videoContainer.appendChild(videoElement)
+
+  // 判断哪些用户是仅开启音频
+  const participants = store.getState().participants
+  const participant = participants.find((p) => p.socketId === connUserSocketId)
+
+  if (participant?.onlyAudio) {
+    videoContainer.appendChild(onlyAudioLabel(participant.identity))
+  }
+
   videosContainer.appendChild(videoContainer)
+}
+
+// 仅开启音频连接的样式效果
+const onlyAudioLabel = (identity = "") => {
+  const labelContainer = document.createElement("div")
+  labelContainer.classList.add("label_only_audio_container")
+
+  const label = document.createElement("p")
+  label.classList.add("label_only_audio_text")
+  label.innerHTML = `${identity}仅开启音频链接`
+
+  labelContainer.appendChild(label)
+
+  return labelContainer
 }
 
 // ===========================================================================

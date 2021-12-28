@@ -48,21 +48,23 @@ export const connectWithSocketIOServer = () => {
 }
 
 // 主持人创建会议房间
-export const createNewRoom = (identity) => {
+export const createNewRoom = (identity, onlyAudio) => {
   // 向服务器发送创建会议房间的数据 (事件)
   const data = {
     identity,
+    onlyAudio,
   }
 
   socket.emit("create-new-room", data)
 }
 
 // 加入会议房间
-export const joinRoom = (roomId, identity) => {
+export const joinRoom = (roomId, identity, onlyAudio) => {
   // 向服务器发送加入会议房间的数据 (事件)
   const data = {
     roomId,
     identity,
+    onlyAudio,
   }
 
   socket.emit("join-room", data)

@@ -9,12 +9,19 @@ import RoomLabel from "./components/RoomLabel"
 import * as webRTCHandler from "../../utils/webRTCHandler"
 import Overlay from "./components/Overlay"
 
-const Room = ({ isRoomHost, identity, roomId, showOverlay }) => {
+const Room = ({
+  isRoomHost,
+  identity,
+  roomId,
+  showOverlay,
+  connectOnlyWithAudio,
+}) => {
   useEffect(() => {
     webRTCHandler.getLocalPreviewAndInitRoomConnection(
       isRoomHost,
       identity,
       roomId,
+      connectOnlyWithAudio,
     )
   }, [])
 
