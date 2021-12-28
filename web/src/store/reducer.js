@@ -7,6 +7,9 @@ const initState = {
   roomId: null,
   participants: [],
 
+  // 聊天室消息
+  messages: [],
+
   // 显示覆盖层 (loading...)
   showOverlay: true,
 }
@@ -47,6 +50,12 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         participants: action.participants,
+      }
+
+    case Actions.SET_MESSAGES:
+      return {
+        ...state,
+        messages: action.messages,
       }
 
     default:

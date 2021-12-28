@@ -5,6 +5,7 @@ const Actions = {
   SET_IDENTITY: "SET_IDENTITY",
   SET_SHOW_OVERLAY: "SET_SHOW_OVERLAY",
   SET_PARTICIPANTS: "SET_PARTICIPANTS",
+  SET_MESSAGES: "SET_MESSAGES",
 }
 
 export default Actions
@@ -37,4 +38,9 @@ export const setShowOverlay = (showOverlay) => ({
 export const setParticipants = (participants) => ({
   type: Actions.SET_PARTICIPANTS,
   participants,
+})
+
+export const setMessages = (messages) => ({
+  type: Actions.SET_MESSAGES,
+  messages,
 })
