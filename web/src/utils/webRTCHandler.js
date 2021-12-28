@@ -205,6 +205,8 @@ const addStream = (stream, connUserSocketId) => {
 
   if (participant?.onlyAudio) {
     videoContainer.appendChild(onlyAudioLabel(participant.identity))
+  } else {
+    videoContainer.style.position = "static"
   }
 
   videosContainer.appendChild(videoContainer)
