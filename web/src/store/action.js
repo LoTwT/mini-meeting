@@ -6,6 +6,9 @@ const Actions = {
   SET_SHOW_OVERLAY: "SET_SHOW_OVERLAY",
   SET_PARTICIPANTS: "SET_PARTICIPANTS",
   SET_MESSAGES: "SET_MESSAGES",
+  SET_ACTIVE_CONVERSATION: "SET_ACTIVE_CONVERSATION",
+  SET_DIRECT_CHAT_HISTORY: "SET_DIRECT_CHAT_HISTORY",
+  SET_SOCKET_ID: "SET_SOCKET_ID",
 }
 
 export default Actions
@@ -43,4 +46,19 @@ export const setParticipants = (participants) => ({
 export const setMessages = (messages) => ({
   type: Actions.SET_MESSAGES,
   messages,
+})
+
+export const setActiveConversation = (activeConversation) => ({
+  type: Actions.SET_ACTIVE_CONVERSATION,
+  activeConversation,
+})
+
+export const setDirectChatHistory = (directChatHistory) => ({
+  type: Actions.SET_DIRECT_CHAT_HISTORY,
+  directChatHistory,
+})
+
+export const setSocketId = (socketId) => ({
+  type: Actions.SET_SOCKET_ID,
+  socketId,
 })
