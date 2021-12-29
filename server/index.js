@@ -63,6 +63,8 @@ io.on("connection", (socket) => {
   socket.on("conn-signal", (data) => signalingHandler(socket, data))
 
   socket.on("conn-init", (data) => initializeConnectionHandler(socket, data))
+
+  socket.on("direct-message", (data) => directMessageHandler(socket, data))
 })
 
 // socket.io handler
@@ -191,6 +193,34 @@ const initializeConnectionHandler = (socket, data) => {
   const initData = { connUserSocketId: socket.id }
 
   io.to(connUserSocketId).emit("conn-init", initData)
+}
+
+const directMessageHandler = (socket, data) => {
+  if (
+    connectedUsers.find(
+      (connUser) => connUser.socketId === data.receiverSocketId,
+    )
+  ) {
+    // 信息传递给接收方
+    const receiverData = {
+      authorSocketId: socket.id,
+      messageContent: data.messageContent,
+      isAuthor: true,
+      identity: data.identity,
+    }
+
+    socket.to(data.receiverSocketId).emit("direct-message", receiverData)
+
+    // 信息返回给发送方
+    const authorData = {
+      receiverSocketId: data.receiverSocketId,
+      messageContent: data.messageContent,
+      isAuthor: true,
+      identity: data.identity,
+    }
+
+    socket.emit("direct-message", authorData)
+  }
 }
 
 // ===========================================================================

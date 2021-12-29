@@ -1,6 +1,8 @@
 import React, { useState } from "react"
+import { connect } from "react-redux"
 
 import sendMessageButton from "../../../../../resources/images/sendMessageButton.svg"
+import * as wss from "../../../../../utils/wss"
 
 const NewMessage = ({ activeConversation, identity }) => {
   const [message, setMessage] = useState("")
@@ -16,6 +18,11 @@ const NewMessage = ({ activeConversation, identity }) => {
 
   const sendMessage = () => {
     // 发送消息
+    wss.sendDirectMessage({
+      receiverSocketId: activeConversation.socketId,
+      identity,
+      messageContent: message,
+    })
   }
 
   return (
@@ -38,4 +45,8 @@ const NewMessage = ({ activeConversation, identity }) => {
   )
 }
 
-export default NewMessage
+const mapStateToProps = (state) => ({
+  ...state,
+})
+
+export default connect(mapStateToProps)(NewMessage)

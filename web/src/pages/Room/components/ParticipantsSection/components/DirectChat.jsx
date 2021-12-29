@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { connect } from "react-redux"
 
 import DirectChatHeader from "./DirectChatHeader"
 import MessagesContainer from "./MessagesContainer"
@@ -18,4 +19,8 @@ const DirectChat = ({ activeConversation, directChatHistory }) => {
   )
 }
 
-export default DirectChat
+const mapStateToProps = (state) => ({
+  ...state,
+})
+
+export default connect(mapStateToProps)(DirectChat)

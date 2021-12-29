@@ -1,5 +1,5 @@
 import io from "socket.io-client"
-import { setParticipants, setRoomId } from "../store/action"
+import { setParticipants, setRoomId, setSocketId } from "../store/action"
 import { store } from "../store/store"
 import * as webRTCHandler from "./webRTCHandler"
 
@@ -11,6 +11,7 @@ export const connectWithSocketIOServer = () => {
 
   socket.on("connect", () => {
     console.log(`连接 socket.io 服务器成功: ${socket.id}`)
+    store.dispatch(setSocketId(socket.id))
   })
 
   socket.on("room-id", (data) => {
@@ -45,6 +46,10 @@ export const connectWithSocketIOServer = () => {
   socket.on("user-disconnected", (data) =>
     webRTCHandler.removePeerConnection(data),
   )
+
+  socket.on("direct-message", (data) => {
+    console.log("成功获取发送私信", data)
+  })
 }
 
 // 主持人创建会议房间
@@ -74,3 +79,7 @@ export const joinRoom = (roomId, identity, onlyAudio) => {
 
 // 将信令数据发送到服务器
 export const signalPeerData = (data) => socket.emit("conn-signal", data)
+
+export const sendDirectMessage = (data) => {
+  socket.emit("direct-message", data)
+}
