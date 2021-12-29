@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 
 import DirectChatHeader from "./DirectChatHeader"
@@ -8,6 +8,29 @@ import ConversationNotChosen from "./ConversationNotChosen"
 
 const DirectChat = ({ activeConversation, directChatHistory }) => {
   const [messages, setMessages] = useState([])
+
+  // 获取用户的历史记录
+  const getDirectChatHistory = (directChatHistory, socketId) => {
+    // 是否存在 directChatHistory 或 socketId
+    if (!directChatHistory || !socketId) {
+      return []
+    }
+
+    const history = directChatHistory.find(
+      (history) => history.socketId === socketId,
+    )
+
+    return history ? history.chatHistory : []
+  }
+
+  useEffect(() => {
+    setMessages(
+      getDirectChatHistory(
+        directChatHistory,
+        activeConversation ? activeConversation.socketId : null,
+      ),
+    )
+  }, [activeConversation, directChatHistory])
 
   return (
     <div className="direct_chat_container">

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 
 const SingleMessage = ({ isAuthor, messageContent }) => {
   const messageStyling = isAuthor
@@ -17,6 +17,15 @@ const SingleMessage = ({ isAuthor, messageContent }) => {
 }
 
 const MessagesContainer = ({ messages }) => {
+  const scrollRef = useRef()
+
+  // 让元素平滑滚动到窗口的可视区域
+  useEffect(() => {
+    if (scrollRef) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [messages])
+
   return (
     <div className="direct_messages_container">
       {messages.map((message) => (
@@ -27,6 +36,7 @@ const MessagesContainer = ({ messages }) => {
           isAuthor={message.isAuthor}
         />
       ))}
+      <div ref={scrollRef}></div>
     </div>
   )
 }

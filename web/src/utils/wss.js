@@ -1,6 +1,7 @@
 import io from "socket.io-client"
 import { setParticipants, setRoomId, setSocketId } from "../store/action"
 import { store } from "../store/store"
+import { appendNewMessageToChatHistory } from "./directMessage"
 import * as webRTCHandler from "./webRTCHandler"
 
 const SERVER = "http://localhost:1015"
@@ -48,7 +49,7 @@ export const connectWithSocketIOServer = () => {
   )
 
   socket.on("direct-message", (data) => {
-    console.log("成功获取发送私信", data)
+    appendNewMessageToChatHistory(data)
   })
 }
 
