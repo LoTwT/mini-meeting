@@ -1,24 +1,22 @@
 import React, { useEffect } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
-import Introduction from "./pages/Introduction/Introduction.jsx"
-import JoinRoom from "./pages/JoinRoom/JoinRoom.jsx"
-import Room from "./pages/Room/Room.jsx"
-import { connectWithSocketIOServer } from "./utils/wss.js"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import IntroductionPage from "./pages/IntroductionPage/IntroductionPage"
+import JoinRoomPage from "./pages/JoinRoomPage/JoinRoomPage"
+import RoomPage from "./pages/RoomPage/RoomPage"
+import { connectWithSocketIOServer } from "./utils/wss"
 
 function App() {
   useEffect(() => {
     connectWithSocketIOServer()
   }, [])
-
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<Introduction />} />
-        <Route path="/join-room" element={<JoinRoom />} />
-        <Route path="/room" element={<Room />} />
+        <Route path="/join-room" element={<JoinRoomPage />} />
+        <Route path="/room" element={<RoomPage />} />
+        <Route path="/" element={<IntroductionPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 

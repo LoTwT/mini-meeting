@@ -1,21 +1,13 @@
-import Actions from "./action"
-
+import Actions from "./actions"
 const initState = {
   identity: "",
   isRoomHost: false,
   connectOnlyWithAudio: false,
   roomId: null,
-  participants: [],
-
-  // 聊天室消息
-  messages: [],
-
-  // 显示覆盖层 (loading...)
   showOverlay: true,
-
-  // 是否开启私聊
+  participants: [],
+  messages: [],
   activeConversation: null,
-  // 聊天记录
   directChatHistory: [],
   socketId: null,
 }
@@ -63,19 +55,16 @@ const reducer = (state = initState, action) => {
         ...state,
         messages: action.messages,
       }
-
     case Actions.SET_ACTIVE_CONVERSATION:
       return {
         ...state,
         activeConversation: action.activeConversation,
       }
-
     case Actions.SET_DIRECT_CHAT_HISTORY:
       return {
         ...state,
         directChatHistory: action.directChatHistory,
       }
-
     case Actions.SET_SOCKET_ID:
       return {
         ...state,

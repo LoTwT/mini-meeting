@@ -1,21 +1,17 @@
 {
-  "name": "mini-meeting-server",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "server",
+  "version": "1.0.0",
+  "description": "webRTC APP",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "socket.io": "^4.4.0",
     "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
   }
 }
